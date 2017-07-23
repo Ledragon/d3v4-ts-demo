@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && rollup -c",
+    "prestart": "tsc && rollup -c",
     "start": "npm-run-all --parallel serve tsc:w rollup:w",
     "serve": "live-server src --watch=src/**/*.html,src/bundle.js,src/**/*.css",
     "tsc:w": "tsc -w",
