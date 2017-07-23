@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && rollup -c",
+    "start": "npm-run-all --parallel serve tsc:w rollup:w",
     "serve": "live-server src --watch=src/**/*.html,src/bundle.js,src/**/*.css",
     "tsc:w": "tsc -w",
     "rollup:w": "rollup -c -w"
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/d3": "^4.10.0",
     "live-server": "^1.2.0",
+    "npm-run-all": "^4.0.2",
     "rollup": "^0.45.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-watch": "^4.3.1",
