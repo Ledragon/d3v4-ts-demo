@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "@types/d3": "^4.10.0",
+    "rollup": "^0.45.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "typescript": "^2.4.2"
   }
 }
