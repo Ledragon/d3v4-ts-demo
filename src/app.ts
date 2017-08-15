@@ -20,3 +20,21 @@ let plotGroup = svg.append('g')
 
 let plotWidth = width - plotMargins.left - plotMargins.right;
 let plotHeight = height - plotMargins.top - plotMargins.bottom;
+
+
+let xScale = d3.scaleTime()
+    .range([0, plotWidth]);
+let xAxis = d3.axisBottom(xScale);
+let xAxisGroup = plotGroup.append('g')
+    .classed('x', true)
+    .classed('axis', true)
+    .attr('transform', `translate(${0},${plotHeight})`)
+    .call(xAxis);
+
+let yScale = d3.scaleLinear()
+    .range([plotHeight, 0]);
+let yAxis = d3.axisLeft(yScale);
+let yAxisGroup = plotGroup.append('g')
+    .classed('y', true)
+    .classed('axis', true)
+    .call(yAxis);
