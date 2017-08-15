@@ -38,3 +38,6 @@ let yAxisGroup = plotGroup.append('g')
     .classed('y', true)
     .classed('axis', true)
     .call(yAxis);
+
+let pointsGroup = plotGroup.append('g')
+    .classed('points', true);
