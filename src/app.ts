@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-import { redditObject } from "./redditFormat";
+import { redditObject } from './redditFormat';
 
 const width = 960;
 const height = 480;
@@ -48,6 +48,36 @@ d3.json<redditObject>('https://api.reddit.com', (error, data) => {
     if (error) {
         console.error(error);
     } else {
-        console.log(data);
+        let prepared = data.data.children.map(d => {
+            return {
+                date: new Date(d.data.created * 1000),
+                score: d.data.score
+            }
+        });
+        xScale.domain(d3.extent(prepared, d => d.date))
+            .nice();
+        xAxisGroup.call(xAxis);
+
+        yScale.domain(d3.extent(prepared, d => d.score))
+            .nice();
+        yAxisGroup.call(yAxis);
+
+        var dataBound = pointsGroup.selectAll('.post')
+            .data(prepared);
+        
+        // delete extra points
+        dataBound
+            .exit()
+            .remove();
+        
+        // add new points
+        var enterSelection = dataBound
+            .enter()
+            .append('g')
+            .classed('post', true);
+        
+        // update all existing points
+        enterSelection.merge(dataBound)
+            .attr('transform', (d, i) => `translate(${xScale(d.date)},${yScale(d.score)})`);
     }
 });
