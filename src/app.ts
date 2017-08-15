@@ -64,18 +64,22 @@ d3.json<redditObject>('https://api.reddit.com', (error, data) => {
 
         var dataBound = pointsGroup.selectAll('.post')
             .data(prepared);
-        
+
         // delete extra points
         dataBound
             .exit()
             .remove();
-        
+
         // add new points
         var enterSelection = dataBound
             .enter()
             .append('g')
             .classed('post', true);
-        
+
+        enterSelection.append('circle')
+            .attr('r', 2)
+            .style('fill', 'red');
+
         // update all existing points
         enterSelection.merge(dataBound)
             .attr('transform', (d, i) => `translate(${xScale(d.date)},${yScale(d.score)})`);
