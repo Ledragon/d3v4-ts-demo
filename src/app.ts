@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
 
+import { redditObject } from "./redditFormat";
+
 const width = 960;
 const height = 480;
 
@@ -41,3 +43,11 @@ let yAxisGroup = plotGroup.append('g')
 
 let pointsGroup = plotGroup.append('g')
     .classed('points', true);
+
+d3.json<redditObject>('https://api.reddit.com', (error, data) => {
+    if (error) {
+        console.error(error);
+    } else {
+        console.log(data);
+    }
+});
